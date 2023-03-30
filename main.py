@@ -6,9 +6,7 @@ import unicodedata
 nome: str
 data: str
 convidados: int
-
 opcao: int
-
 carrinho = []
 
 
@@ -46,12 +44,6 @@ def decoracao_menu():
                     carrinho.append(item_escolhido)
                     print(f'{item_escolhido.nome} adicionado ao carrinho.')
 
-        #item_escolhido = decoracao[getEscolhas]
-        # Adicionar o produto ao carrinho
-        #carrinho.append(item_escolhido)
-        # Adicionar o preço do produto ao total da compra
-
-
 
 def servico_menu():
     servico = {
@@ -69,17 +61,19 @@ def servico_menu():
 
         escolha = normalizar(input("Digite os itens que deseja adicionar ao carrinho ou fim: "))
 
-        # Verificar se o produto existe no dicionário de produtos
-        if escolha not in servico:
-            if escolha != 'fim':
-                print('Produto não encontrado.')
-            continue
+        getEscolhas = escolha.split(", ")
 
-        item_escolhido = servico[escolha]
-        # Adicionar o produto ao carrinho
-        carrinho.append(item_escolhido)
-        # Adicionar o preço do produto ao total da compra
-        print(f'{item_escolhido.nome} adicionado ao carrinho.')
+        # Verificar se o produto existe no dicionário de produtos
+        if escolha != 'fim':
+            for e in getEscolhas:
+                if e not in servico:
+                    print('Produto não encontrado.')
+                    continue
+                else:
+                    item_escolhido = servico[e]
+                    carrinho.append(item_escolhido)
+                    print(f'{item_escolhido.nome} adicionado ao carrinho.')
+
 
 def local_menu():
     local = {
@@ -94,17 +88,18 @@ def local_menu():
 
         escolha = normalizar(input("Digite os itens que deseja adicionar ao carrinho ou fim: "))
 
-        # Verificar se o produto existe no dicionário de produtos
-        if escolha not in local:
-            if escolha != 'fim':
-                print('Produto não encontrado.')
-            continue
+        getEscolhas = escolha.split(", ")
 
-        item_escolhido = local[escolha]
-        # Adicionar o produto ao carrinho
-        carrinho.append(item_escolhido)
-        # Adicionar o preço do produto ao total da compra
-        print(f'{item_escolhido.nome} adicionado ao carrinho.')
+        # Verificar se o produto existe no dicionário de produtos
+        if escolha != 'fim':
+            for e in getEscolhas:
+                if e not in local:
+                    print('Produto não encontrado.')
+                    continue
+                else:
+                    item_escolhido = local[e]
+                    carrinho.append(item_escolhido)
+                    print(f'{item_escolhido.nome} adicionado ao carrinho.')
 
 
 def buffet_menu():
