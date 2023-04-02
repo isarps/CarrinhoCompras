@@ -1,0 +1,56 @@
+.chat{
+    position: fixed;
+    right:20px;
+    bottom: 10px;
+    border: solid 1px;
+    width: 230px;
+    background: #5f023171;
+}
+
+.areaInput{
+    background: #5f023171;
+    display: flex;
+    align-items: center;
+    padding-left: 5px;
+}
+
+.areaInput input{
+    width: 180px;
+    height: 19px; 
+    background: #f3f3f371;   
+    
+}
+
+::placeholder{
+    color: rgb(44, 44, 44);
+}
+
+.areaInput svg{
+    height: 30px;
+    bottom: 10px;
+    rotate: 45deg;
+    color: rgb(83, 4, 63);
+    
+} 
+
+.areaTexto{
+    width: 100%;
+    height: 300px;
+    position: relative;
+    
+    
+}
+
+.bot{
+    background:rgb(165, 144, 158) ;
+    width: max-content;
+
+}
+
+.usuario{
+    right: 0px;
+    /*position: absolute;*/
+    position: left;
+    background:rgb(247, 232, 242) ;
+    width: max-content;
+}
