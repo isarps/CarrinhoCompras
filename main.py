@@ -1,6 +1,9 @@
 from model import Item, Menu
 from datetime import datetime
 import unicodedata
+from pymongo_get_database import get_database
+dbname = get_database()
+collection = dbname["carrinho_compras"]
 
 nome: str
 data: str
@@ -8,14 +11,13 @@ convidados: int
 opcao: int
 carrinho = []
 
-
 def normalizar(string: str):
     return unicodedata.normalize('NFKD', string).encode('ASCII', 'ignore').decode('utf-8').lower()
 
 
 def decoracao_menu():
     decoracao = {
-        '\n1': Item('Arco de balões', 180.00),
+        '1': Item('Arco de balões', 180.00),
         '2': Item('Bolo fake', 50.00),
         '3': Item('Kit de móveis provençais', 180.00),
         '4': Item('Painel de balões', 130.00),
@@ -27,19 +29,19 @@ def decoracao_menu():
 
 def servico_menu():
     servico = {
-        '\n1': Item('Cozinheiro', 170.00),
+        '1': Item('Cozinheiro', 170.00),
         '2': Item('Copeiro', 130.00),
         '3': Item('Churrasqueiro', 190.00),
         '4': Item('Recreador', 170.00),
         '5': Item('Recepcionista', 100.00),
 
     }
-    Menu(item.servico).iniciar(carrinho)
+    Menu(items=servico).iniciar(carrinho)
 
 
 def local_menu():
     local = {
-        '\n1': Item('Salão', 800.00),
+        '1': Item('Salão', 800.00),
         '2': Item('Chacára', 1000.00),
 
     }
@@ -48,7 +50,7 @@ def local_menu():
 
 def buffet_menu():
     buffet = {
-        '\n1': Item('Arroz e guarnição', 300.00),
+        '1': Item('Arroz e guarnição', 300.00),
         '2': Item('Bolo de corte', 100.00),
         '3': Item('Churrasco', 400.00),
         '4': Item('Massas', 300.00),
@@ -75,6 +77,26 @@ def exibir_carrinho():
         print(f"|--\t{item_selecionado.nome} R$ {item_selecionado.preco:.2f}")
     print(f"|\tTotal = R$ {total:.2f}")
 
+def salvar_carrinho():
+    total: float = 0
+    carrinhoCompleto = []
+    for item in carrinho:
+        total += item.preco
+        carrinhoCompleto.append({
+            "item": item.nome,
+            "preco": item.preco
+        })
+    item = {
+        "nome": nome,
+        "cidade": cidade,
+        "convidados": convidados,
+        "data": data,
+        "carrinho": carrinhoCompleto,
+        "total": total
+    }
+
+    collection.insert_one(item)
+    exit()
 
 print("Bem-vindo ao iFest!")
 
@@ -96,7 +118,7 @@ while True:
         case 4:
             servico_menu()
         case 0:
-            break
+            salvar_carrinho()
     exibir_carrinho()
 
 exibir_carrinho()
