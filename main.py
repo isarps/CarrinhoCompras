@@ -78,24 +78,28 @@ def exibir_carrinho():
     print(f"|\tTotal = R$ {total:.2f}")
 
 def salvar_carrinho():
-    total: float = 0
-    carrinhoCompleto = []
-    for item in carrinho:
-        total += item.preco
-        carrinhoCompleto.append({
-            "item": item.nome,
-            "preco": item.preco
-        })
-    item = {
-        "nome": nome,
-        "cidade": cidade,
-        "convidados": convidados,
-        "data": data,
-        "carrinho": carrinhoCompleto,
-        "total": total
-    }
+    try:
+        total: float = 0
+        carrinhoCompleto = []
+        for item in carrinho:
+            total += item.preco
+            carrinhoCompleto.append({
+                "item": item.nome,
+                "preco": item.preco
+            })
+        item = {
+            "nome": nome,
+            "cidade": cidade,
+            "convidados": convidados,
+            "data": data,
+            "carrinho": carrinhoCompleto,
+            "total": total
+        }
 
-    collection.insert_one(item)
+        collection.insert_one(item)
+        print("Carrinho de compras salvo com sucesso.")
+    except:
+        print("Erro ao salvar carrinho de compras.")
     exit()
 
 print("Bem-vindo ao iFest!")

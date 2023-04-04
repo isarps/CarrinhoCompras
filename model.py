@@ -22,7 +22,7 @@ class Menu:
 
             escolha =self.normalizar(input("\nDigite os itens que deseja adicionar ao carrinho ou voltar: "))
 
-            getEscolhas = escolha.split(", ")
+            getEscolhas = escolha.replace(" ","").split(",")
 
             # Verificar se o produto existe no dicionário de produtos
             if escolha != 'voltar':
